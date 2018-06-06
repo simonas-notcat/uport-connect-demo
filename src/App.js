@@ -33,7 +33,7 @@ class App extends Component {
   }
 
   handleLogin() {
-    credentials.requestDisclosure({
+    connect.credentials.requestDisclosure({
       requested: ['avatar', 'name'],
       notifications: true,
       callbackUrl: CHASQUI_URL + crypto.randomString(16),
@@ -44,13 +44,13 @@ class App extends Component {
   }
 
   handleClick() {
-    credentials.createVerificationRequest(
+    connect.credentials.createVerificationRequest(
       { name: 'Bob' }, // Claim
       '2or9w8Z9EfEJ4FUt1VarhEJCqz7tXsLhbcE' // Subject (did format?)
     )
     .then(requestToken => {
       console.log(requestToken)
-      connect.request('signVerification', requestToken)
+      connect.request(requestToken, 'signVerification')
     })
     
   }
